@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>M.Dutra | Regularização de INSS de Obra — Analise antes de pagar</title>
+  <meta name="description" content="Recebeu uma guia alta de INSS de obra? Antes de pagar, descubra quanto você pode economizar legalmente. Análise especializada com mais de 30 anos de experiência.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --navy-950: #01001e;
+      --navy-900: #070826;
+      --navy-850: #0d0e30;
+      --navy-800: #13153c;
+      --navy-700: #191a3b;
+      --navy-600: #21235a;
+      --gold-700: #96783f;
+      --gold-600: #b69f51;
+      --gold-500: #d2af6d;
+      --gold-400: #e3c465;
+      --gold-100: #ffecc8;
+      --light: #f3f4f7;
+      --white: #ffffff;
+      --text-muted: rgba(243, 244, 247, 0.72);
+      --gold-gradient: linear-gradient(100deg, var(--gold-700) 0%, var(--gold-600) 35%, var(--gold-400) 100%);
+      --radius: 16px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Sora', sans-serif;
+      background: var(--navy-900);
+      color: var(--light);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      width: min(1140px, 92%);
+      margin: 0 auto;
+    }
+
+    section { padding: 96px 0; position: relative; }
+
+    /* ---------- Typography ---------- */
+    h1, h2, h3 { font-weight: 700; line-height: 1.2; color: var(--white); }
+    h1 { font-size: clamp(2rem, 4.4vw, 3.2rem); letter-spacing: -0.02em; }
+    h2 { font-size: clamp(1.7rem, 3.2vw, 2.4rem); letter-spacing: -0.01em; }
+    h3 { font-size: 1.15rem; }
+
+    .gold {
+      background: var(--gold-gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .section-label {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold-500);
+      border: 1px solid rgba(182, 159, 81, 0.4);
+      border-radius: 100px;
+      padding: 7px 18px;
+      margin-bottom: 22px;
+    }
+
+    .section-head { text-align: center; max-width: 760px; margin: 0 auto 56px; }
+    .section-head p { margin-top: 16px; color: var(--text-muted); font-size: 1.05rem; }
+
+    /* ---------- Buttons ---------- */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-family: inherit;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 17px 34px;
+      border-radius: 100px;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      white-space: nowrap;
+    }
+
+    .btn-gold {
+      background: var(--gold-gradient);
+      color: var(--navy-950);
+      box-shadow: 0 10px 30px rgba(182, 159, 81, 0.35);
+    }
+
+    .btn-gold:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 40px rgba(182, 159, 81, 0.5);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--gold-400);
+      border: 1.5px solid rgba(182, 159, 81, 0.55);
+    }
+
+    .btn-outline:hover {
+      background: rgba(182, 159, 81, 0.1);
+      transform: translateY(-3px);
+    }
+
+    /* ---------- Header ---------- */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(7, 8, 38, 0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(182, 159, 81, 0.18);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 78px;
+    }
+
+    .logo { display: flex; align-items: center; }
+
+    .logo img {
+      height: 60px;
+      width: auto;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--gold-400); }
+
+    .nav .btn { padding: 12px 26px; font-size: 0.9rem; }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      width: 30px;
+      height: 24px;
+      position: relative;
+      z-index: 110;
+    }
+
+    .menu-toggle span {
+      display: block;
+      height: 2px;
+      background: var(--gold-400);
+      border-radius: 2px;
+      margin: 6px 0;
+      transition: 0.3s;
+    }
+
+    /* ---------- Hero ---------- */
+    .hero {
+      padding: 190px 0 110px;
+      background:
+        radial-gradient(ellipse 70% 55% at 75% 10%, rgba(182, 159, 81, 0.16), transparent 60%),
+        radial-gradient(ellipse 60% 50% at 15% 90%, rgba(33, 35, 90, 0.55), transparent 65%),
+        var(--navy-900);
+      text-align: center;
+    }
+
+    .hero-inner { max-width: 860px; margin: 0 auto; }
+
+    .hero h1 { margin-bottom: 22px; }
+    .hero h1 em { font-style: normal; color: var(--gold-400); }
+
+    .hero .sub {
+      font-size: clamp(1.1rem, 2vw, 1.3rem);
+      font-weight: 600;
+      color: var(--gold-100);
+      margin-bottom: 30px;
+    }
+
+    .hero-copy {
+      color: var(--text-muted);
+      font-size: 1.02rem;
+      max-width: 740px;
+      margin: 0 auto 26px;
+    }
+
+    .hero-support {
+      font-size: 1.02rem;
+      font-weight: 600;
+      color: var(--white);
+      background: rgba(182, 159, 81, 0.1);
+      border: 1px solid rgba(182, 159, 81, 0.3);
+      border-radius: var(--radius);
+      padding: 20px 28px;
+      max-width: 680px;
+      margin: 0 auto 38px;
+    }
+
+    .hero-support strong { color: var(--gold-400); }
+
+    /* ---------- Soluções ---------- */
+    .solucoes { background: var(--navy-850); }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(245px, 1fr));
+      gap: 24px;
+      margin-bottom: 56px;
+    }
+
+    .card {
+      background: var(--navy-800);
+      border: 1px solid rgba(182, 159, 81, 0.18);
+      border-radius: var(--radius);
+      padding: 34px 28px;
+      transition: transform 0.25s ease, border-color 0.25s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(182, 159, 81, 0.5);
+    }
+
+    .card-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      background: rgba(182, 159, 81, 0.12);
+      border: 1px solid rgba(182, 159, 81, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .card-icon svg { width: 26px; height: 26px; stroke: var(--gold-400); }
+
+    .card h3 { margin-bottom: 10px; }
+    .card p { color: var(--text-muted); font-size: 0.94rem; }
+
+    .impact {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .impact-phrase {
+      font-size: clamp(1.2rem, 2.4vw, 1.6rem);
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 30px;
+    }
+
+    .impact-phrase .gold { display: inline; }
+
+    /* ---------- Resultados ---------- */
+    .resultados {
+      background:
+        radial-gradient(ellipse 55% 45% at 50% 0%, rgba(182, 159, 81, 0.1), transparent 65%),
+        var(--navy-900);
+    }
+
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 28px;
+      margin-bottom: 48px;
+    }
+
+    .result-card {
+      background: var(--navy-800);
+      border: 1px solid rgba(182, 159, 81, 0.22);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .result-card-head {
+      background: var(--gold-gradient);
+      color: var(--navy-950);
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 14px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .result-card-head .tag {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: rgba(1, 0, 30, 0.18);
+      padding: 4px 12px;
+      border-radius: 100px;
+    }
+
+    .result-body { padding: 28px; }
+
+    .result-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      padding: 13px 0;
+      border-bottom: 1px solid rgba(243, 244, 247, 0.08);
+      font-size: 0.95rem;
+    }
+
+    .result-row .label { color: var(--text-muted); }
+    .result-row .value { font-weight: 700; color: var(--white); white-space: nowrap; }
+    .result-row .value.strike { text-decoration: line-through; color: rgba(243, 244, 247, 0.5); font-weight: 500; }
+
+    .result-economy {
+      margin: 20px 0;
+      background: rgba(182, 159, 81, 0.1);
+      border: 1px solid rgba(182, 159, 81, 0.35);
+      border-radius: 12px;
+      padding: 18px 22px;
+      text-align: center;
+    }
+
+    .result-economy .label {
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .result-economy .amount {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--gold-400);
+    }
+
+    .result-economy .pct {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--gold-100);
+      margin-left: 6px;
+    }
+
+    .result-quote {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      font-style: italic;
+      border-left: 3px solid var(--gold-600);
+      padding-left: 16px;
+    }
+
+    .reinforce {
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto 36px;
+      font-size: 1.12rem;
+      font-weight: 600;
+      color: var(--white);
+    }
+
+    .reinforce .gold { display: inline; }
+
+    .center { text-align: center; }
+
+    .disclaimer {
+      margin-top: 28px;
+      text-align: center;
+      font-size: 0.78rem;
+      color: rgba(243, 244, 247, 0.45);
+      max-width: 720px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ---------- Sobre ---------- */
+    .sobre { background: var(--navy-850); }
+
+    .sobre-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 56px;
+      align-items: start;
+      margin-bottom: 60px;
+    }
+
+    .sobre-text h2 { margin-bottom: 8px; }
+
+    .sobre-text .sub {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--gold-400);
+      margin-bottom: 24px;
+    }
+
+    .sobre-text p { color: var(--text-muted); margin-bottom: 18px; }
+
+    .sobre-points { display: flex; flex-direction: column; gap: 18px; }
+
+    .point {
+      background: var(--navy-800);
+      border: 1px solid rgba(182, 159, 81, 0.18);
+      border-left: 4px solid var(--gold-600);
+      border-radius: 12px;
+      padding: 22px 24px;
+    }
+
+    .point h3 { font-size: 1rem; margin-bottom: 6px; }
+    .point p { font-size: 0.9rem; color: var(--text-muted); font-style: italic; }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+
+    .stat {
+      text-align: center;
+      background: var(--navy-800);
+      border: 1px solid rgba(182, 159, 81, 0.18);
+      border-radius: var(--radius);
+      padding: 32px 20px;
+    }
+
+    .stat .num {
+      font-size: clamp(1.9rem, 3vw, 2.5rem);
+      font-weight: 800;
+      background: var(--gold-gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      display: block;
+      margin-bottom: 8px;
+      line-height: 1.1;
+    }
+
+    .stat .desc { font-size: 0.88rem; color: var(--text-muted); }
+
+    /* ---------- Depoimentos ---------- */
+    .depoimentos {
+      background:
+        radial-gradient(ellipse 55% 50% at 20% 15%, rgba(182, 159, 81, 0.08), transparent 60%),
+        var(--navy-900);
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 26px;
+    }
+
+    .testimonial {
+      background: var(--navy-800);
+      border: 1px solid rgba(182, 159, 81, 0.18);
+      border-radius: var(--radius);
+      padding: 34px 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .testimonial .quote-mark {
+      font-size: 3rem;
+      line-height: 0.6;
+      font-weight: 800;
+      color: var(--gold-500);
+      font-family: Georgia, serif;
+    }
+
+    .testimonial p { color: var(--text-muted); font-size: 0.96rem; flex: 1; }
+
+    .testimonial .stars { color: var(--gold-400); letter-spacing: 3px; font-size: 0.95rem; }
+
+    /* ---------- FAQ ---------- */
+    .faq { background: var(--navy-850); }
+
+    .faq-list { max-width: 800px; margin: 0 auto 48px; }
+
+    .faq-item {
+      background: var(--navy-800);
+      border: 1px solid rgba(182, 159, 81, 0.18);
+      border-radius: 12px;
+      margin-bottom: 14px;
+      overflow: hidden;
+      transition: border-color 0.25s;
+    }
+
+    .faq-item[open] { border-color: rgba(182, 159, 81, 0.5); }
+
+    .faq-item summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 22px 26px;
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--white);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .faq-item summary::-webkit-details-marker { display: none; }
+
+    .faq-item summary::after {
+      content: '+';
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: var(--gold-400);
+      flex-shrink: 0;
+      transition: transform 0.25s;
+      line-height: 1;
+    }
+
+    .faq-item[open] summary::after { transform: rotate(45deg); }
+
+    .faq-item .answer {
+      padding: 0 26px 24px;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    /* ---------- CTA Final ---------- */
+    .cta-final {
+      background:
+        radial-gradient(ellipse 65% 60% at 50% 100%, rgba(182, 159, 81, 0.2), transparent 65%),
+        var(--navy-900);
+      text-align: center;
+      padding: 110px 0;
+    }
+
+    .cta-final h2 { max-width: 780px; margin: 0 auto 24px; font-size: clamp(1.8rem, 3.6vw, 2.7rem); }
+
+    .cta-final p {
+      max-width: 700px;
+      margin: 0 auto 40px;
+      color: var(--text-muted);
+      font-size: 1.05rem;
+    }
+
+    .cta-final p strong { color: var(--gold-100); }
+
+    /* ---------- Footer ---------- */
+    footer {
+      background: var(--navy-950);
+      border-top: 1px solid rgba(182, 159, 81, 0.18);
+      padding: 48px 0 36px;
+      text-align: center;
+    }
+
+    footer .logo { justify-content: center; margin-bottom: 20px; }
+    footer .logo img { height: 96px; }
+
+    footer .footer-desc {
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      max-width: 620px;
+      margin: 0 auto 24px;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 28px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--gold-400); }
+
+    .copyright {
+      font-size: 0.8rem;
+      color: rgba(243, 244, 247, 0.4);
+      border-top: 1px solid rgba(243, 244, 247, 0.08);
+      padding-top: 24px;
+    }
+
+    /* ---------- WhatsApp float ---------- */
+    .whats-float {
+      position: fixed;
+      bottom: 26px;
+      right: 26px;
+      z-index: 90;
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background: #25d366;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+      transition: transform 0.25s;
+    }
+
+    .whats-float:hover { transform: scale(1.1); }
+    .whats-float svg { width: 30px; height: 30px; fill: #fff; }
+
+    /* ---------- Reveal animation ---------- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 900px) {
+      .sobre-grid { grid-template-columns: 1fr; gap: 36px; }
+    }
+
+    @media (max-width: 820px) {
+      .menu-toggle { display: block; }
+
+      .nav-links {
+        position: fixed;
+        inset: 0;
+        background: var(--navy-950);
+        flex-direction: column;
+        justify-content: center;
+        gap: 30px;
+        transform: translateX(100%);
+        transition: transform 0.35s ease;
+      }
+
+      .nav-links.open { transform: translateX(0); }
+      .nav-links a { font-size: 1.2rem; }
+
+      .nav > .btn { display: none; }
+
+      .menu-toggle.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+      .menu-toggle.open span:nth-child(2) { opacity: 0; }
+      .menu-toggle.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+      section { padding: 70px 0; }
+      .hero { padding: 150px 0 80px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============ HEADER ============ -->
+  <header>
+    <div class="container nav">
+      <a href="#inicio" class="logo"><img src="assets/logo-mdutra.png" alt="M.Dutra Soluções Financeiras"></a>
+
+      <button class="menu-toggle" aria-label="Abrir menu" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#inicio" onclick="closeMenu()">Início</a></li>
+        <li><a href="#como-funciona" onclick="closeMenu()">Como Funciona</a></li>
+        <li><a href="#resultados" onclick="closeMenu()">Resultados</a></li>
+        <li><a href="#sobre" onclick="closeMenu()">Sobre</a></li>
+        <li><a href="https://wa.me/5548992168025?text=Ol%C3%A1!%20Quero%20analisar%20a%20d%C3%ADvida%20do%20INSS%20da%20minha%20obra." target="_blank" rel="noopener" class="btn btn-gold" style="display:none" onclick="closeMenu()">Analisar Minha Dívida</a></li>
+      </ul>
+
+      <a href="https://wa.me/5548992168025?text=Ol%C3%A1!%20Quero%20analisar%20a%20d%C3%ADvida%20do%20INSS%20da%20minha%20obra." target="_blank" rel="noopener" class="btn btn-gold">Analisar Minha Dívida</a>
+    </div>
+  </header>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="inicio">
+    <div class="container hero-inner">
+      <h1 class="reveal">Você está prestes a pagar <em>70% a mais</em> do que deveria no INSS da sua obra.</h1>
+      <p class="sub reveal">Descubra quanto você pode economizar (legalmente) antes de pagar a primeira guia.</p>
+
+      <p class="hero-copy reveal">
+        Você recebeu uma guia alta para regularizar o INSS da sua obra? Antes de pagar, você precisa saber isto:
+        muitas cobranças podem ser reduzidas legalmente. Mas a maioria das pessoas não sabe disso.
+        Elas pagam o valor cheio, sem questionar. Depois, quando descobrem que poderiam ter economizado
+        50%, 60%, até 70% aplicando o fator de ajuste — já é tarde demais.
+        A M.Dutra faz a análise: identificamos cada detalhe, cada dedução legal, cada enquadramento que pode
+        reduzir o que você deve. E o melhor: você só paga o mínimo necessário, dentro da lei.
+      </p>
+
+      <p class="hero-support reveal">
+        Veja como a análise correta pode transformar uma cobrança de <strong>R$ 30 mil</strong> em uma economia
+        de <strong>R$ 20 mil</strong>. E por que esperar para descobrir isto?
+      </p>
+
+      <a href="https://wa.me/5548992168025?text=Ol%C3%A1!%20Quero%20analisar%20a%20d%C3%ADvida%20do%20INSS%20da%20minha%20obra." target="_blank" rel="noopener" class="btn btn-gold reveal">Analisar Minha Dívida Agora →</a>
+    </div>
+  </section>
+
+  <!-- ============ SOLUÇÕES ============ -->
+  <section class="solucoes" id="como-funciona">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="section-label">Como Funciona</span>
+        <h2>Uma solução completa para <span class="gold">regularizar o INSS da sua obra</span></h2>
+        <p>
+          Antes de pagar uma guia alta, a M.Dutra analisa se aquele valor realmente faz sentido.
+          A gente verifica, confere o cálculo, analisa a documentação e identifica se existe possibilidade
+          legal de redução do INSS. Tudo em um único processo, com foco em segurança fiscal e economia dentro da lei.
+        </p>
+      </div>
+
+      <div class="cards-grid">
+        <div class="card reveal">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"/></svg>
+          </div>
+          <h3>Situação da obra</h3>
+          <p>Entendemos se a construção foi feita no CPF, se já existe cobrança e qual é a pendência.</p>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 10h2M14 10h2M8 14h2M14 14h2M8 18h2M14 18h2"/></svg>
+          </div>
+          <h3>Cálculo do INSS</h3>
+          <p>Conferimos se o valor apresentado está coerente antes de você pagar.</p>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 17l-6-6-4 4-7-7"/><path d="M21 17v-5M21 17h-5"/></svg>
+          </div>
+          <h3>Possibilidade de redução</h3>
+          <p>Verificamos se há caminhos legais para diminuir o valor aplicando o fator de ajuste.</p>
+        </div>
+
+        <div class="card reveal">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg>
+          </div>
+          <h3>Regularização da CND</h3>
+          <p>Conduzimos o processo para regularizar seu INSS de obra com segurança.</p>
+        </div>
+      </div>
+
+      <div class="impact reveal">
+        <p class="impact-phrase">Não pague no escuro. <span class="gold">Uma análise antes do pagamento pode evitar prejuízo.</span></p>
+        <a href="https://wa.me/5548992168025?text=Ol%C3%A1!%20Quero%20analisar%20o%20INSS%20da%20minha%20obra." target="_blank" rel="noopener" class="btn btn-gold">Quero analisar meu INSS de obra</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ RESULTADOS ============ -->
+  <section class="resultados" id="resultados">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="section-label">Resultados Reais</span>
+        <h2>Quanto você pode <span class="gold">economizar?</span></h2>
+        <p>
+          Estes são exemplos reais. Clientes que receberam uma cobrança, questionaram,
+          e descobriram que poderiam economizar dezenas de milhares de reais.
+        </p>
+      </div>
+
+      <div class="results-grid">
+        <div class="result-card reveal">
+          <div class="result-card-head">
+            <span>Obra de 270m²</span>
+            <span class="tag">Resultado Real</span>
+          </div>
+          <div class="result-body">
+            <div class="result-row">
+              <span class="label">Cobrança inicial</span>
+              <span class="value strike">R$ 32.607,91</span>
+            </div>
+            <div class="result-row">
+              <span class="label">Depois da nossa análise</span>
+              <span class="value">R$ 8.860,80</span>
+            </div>
+            <div class="result-economy">
+              <span class="label">Você economiza</span>
+              <span class="amount">R$ 23.747,11</span><span class="pct">(72,83%)</span>
+            </div>
+            <p class="result-quote">
+              "Eu achei que era obrigado a pagar o valor do INSS de obra cheio. Depois que a Marli analisou,
+              descobri que tinha espaço para reduzir. Foi um alívio enorme."
+            </p>
+          </div>
+        </div>
+
+        <div class="result-card reveal">
+          <div class="result-card-head">
+            <span>Obra de 180m²</span>
+            <span class="tag">Resultado Real</span>
+          </div>
+          <div class="result-body">
+            <div class="result-row">
+              <span class="label">Cobrança inicial</span>
+              <span class="value strike">R$ 18.500,00</span>
+            </div>
+            <div class="result-row">
+              <span class="label">Depois da nossa análise</span>
+              <span class="value">R$ 5.200,00</span>
+            </div>
+            <div class="result-economy">
+              <span class="label">Você economiza</span>
+              <span class="amount">R$ 13.300,00</span><span class="pct">(71,89%)</span>
+            </div>
+            <p class="result-quote">
+              "Meu imóvel estava travado por causa do INSS de obra. Não conseguia vender.
+              A Marli destrancou tudo. Hoje meu imóvel está vendido."
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <p class="reinforce reveal">
+        Imagine pagar R$ 32 mil sem questionar. Depois, descobrir que poderia ter pago R$ 8 mil.
+        <span class="gold">Esse é o prejuízo silencioso que a gente evita.</span>
+      </p>
+
+      <div class="center reveal">
+        <a href="https://wa.me/5548992168025?text=Ol%C3%A1!%20Quero%20descobrir%20quanto%20posso%20economizar%20no%20INSS%20da%20minha%20obra." target="_blank" rel="noopener" class="btn btn-gold">Descobrir Minha Economia</a>
+      </div>
+
+      <p class="disclaimer">
+        Os valores são exemplos e podem variar conforme cada caso. A possibilidade de redução depende
+        da análise documental, metragem, tipo de construção e legislação aplicável.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ SOBRE ============ -->
+  <section class="sobre" id="sobre">
+    <div class="container">
+      <div class="sobre-grid">
+        <div class="sobre-text reveal">
+          <span class="section-label">Quem está por trás disso</span>
+          <h2>30 anos vendo o que <span class="gold">ninguém mais vê.</span></h2>
+          <p class="sub">E economizando o que ninguém mais economiza.</p>
+          <p>
+            Marli Dutra é contadora, especialista em regularização de INSS de obra, com mais de 30 anos
+            de experiência. Sua atuação vai além de simplesmente calcular um tributo: ela analisa cada detalhe,
+            identifica riscos, verifica possibilidades legais de redução aplicando o fator de ajuste e conduz
+            o processo com segurança fiscal.
+          </p>
+          <p>
+            Porque, quando o assunto é INSS de obra, um detalhe ignorado pode representar milhares de reais
+            pagos a mais. E o papel da Marli é garantir que você regularize sua obra dentro da lei,
+            sem pagar mais do que realmente precisa.
+          </p>
+        </div>
+
+        <div class="sobre-points reveal">
+          <div class="point">
+            <h3>Análise antes do pagamento</h3>
+            <p>"Ninguém paga sem saber o que está pagando."</p>
+          </div>
+          <div class="point">
+            <h3>Estratégia legal e segurança fiscal</h3>
+            <p>"Economia legal. Sem riscos. Sem culpa."</p>
+          </div>
+          <div class="point">
+            <h3>Atendimento especializado em redução de INSS de obras</h3>
+            <p>"Quem fala com você entende o seu problema. Porque vive disso há 30 anos."</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat reveal">
+          <span class="num">30 anos</span>
+          <span class="desc">de experiência em INSS de obra</span>
+        </div>
+        <div class="stat reveal">
+          <span class="num">2.000+</span>
+          <span class="desc">INSS de obra regularizados com economia</span>
+        </div>
+        <div class="stat reveal">
+          <span class="num">R$ 100 mi</span>
+          <span class="desc">economizados para clientes</span>
+        </div>
+        <div class="stat reveal">
+          <span class="num">Todo Brasil</span>
+          <span class="desc">nenhuma obra é pequena demais</span>
+        </div>
+      </div>
+
+      <div class="center reveal">
+        <a href="https://wa.me/5548992168025?text=Ol%C3%A1!%20Quero%20conhecer%20o%20trabalho%20da%20M.Dutra." target="_blank" rel="noopener" class="btn btn-outline">Conheça nosso trabalho</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DEPOIMENTOS ============ -->
+  <section class="depoimentos">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="section-label">Depoimentos</span>
+        <h2>O que nossos <span class="gold">clientes dizem</span></h2>
+        <p>
+          Estas são histórias reais de pessoas que economizaram milhares de reais.
+          Porque questionaram. Porque analisaram. Porque tiveram a ajuda certa.
+        </p>
+      </div>
+
+      <div class="testimonials-grid">
+        <div class="testimonial reveal">
+          <span class="quote-mark">"</span>
+          <p>
+            Recebi uma cobrança de R$ 28 mil e achei que era obrigado a pagar. Depois que a Marli analisou,
+            descobri que podia reduzir o INSS de obra para R$ 7 mil. Não acreditei.
+            Foi a economia que salvou meu projeto.
+          </p>
+          <span class="stars">★★★★★</span>
+        </div>
+
+        <div class="testimonial reveal">
+          <span class="quote-mark">"</span>
+          <p>
+            Meu imóvel estava travado por não ter CND da obra. Não conseguia vender porque não paguei
+            o INSS na época. A Marli aplicou o fator de ajuste e hoje meu imóvel está vendido
+            e eu durmo tranquilo.
+          </p>
+          <span class="stars">★★★★★</span>
+        </div>
+
+        <div class="testimonial reveal">
+          <span class="quote-mark">"</span>
+          <p>
+            Eu não entendia nada de INSS de obra. Recebi uma cobrança e fiquei assustado.
+            A Marli explicou tudo, mostrou o caminho, e agora estou tranquilo. Sem medo. Sem dúvida.
+          </p>
+          <span class="stars">★★★★★</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section class="faq">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="section-label">Dúvidas Frequentes</span>
+        <h2>Perguntas que você <span class="gold">provavelmente tem</span></h2>
+        <p>
+          Se você está aqui, provavelmente tem uma dúvida. Pode ser sobre como funciona,
+          se precisa regularizar, ou se realmente precisa pagar aquele valor alto.
+          Aqui estão as respostas.
+        </p>
+      </div>
+
+      <div class="faq-list reveal">
+        <details class="faq-item">
+          <summary>Toda obra precisa pagar INSS?</summary>
+          <p class="answer">
+            Nem toda, mas a maioria sim. E se a sua precisa, é melhor saber agora do que descobrir
+            quando a Receita Federal bater na sua porta.
+          </p>
+        </details>
+
+        <details class="faq-item">
+          <summary>Pessoa física também precisa regularizar INSS de obra?</summary>
+          <p class="answer">
+            Sim. E é aqui que a maioria das pessoas é pega de surpresa. Construiu no seu CPF?
+            Então você precisa saber disso.
+          </p>
+        </details>
+
+        <details class="faq-item">
+          <summary>O que é CND de obra?</summary>
+          <p class="answer">
+            É o documento que prova que sua obra está limpa com a Receita Federal. Sem ela, você não vende,
+            não financia, não avança. Com ela, tudo flui.
+          </p>
+        </details>
+
+        <details class="faq-item">
+          <summary>É possível reduzir o INSS da obra?</summary>
+          <p class="answer">
+            Em muitos casos, sim, aplicando o fator de ajuste. Mas você só descobre se analisar.
+            E é por isso que a gente existe.
+          </p>
+        </details>
+
+        <details class="faq-item">
+          <summary>Recebi uma guia alta. Ainda posso pedir análise?</summary>
+          <p class="answer">
+            Sim. E é AGORA que você deveria ter feito isso. Antes de pagar. Fale com a gente.
+          </p>
+        </details>
+
+        <details class="faq-item">
+          <summary>A redução é garantida?</summary>
+          <p class="answer">
+            Não. Mas o que é garantido é que você vai saber exatamente o que está pagando.
+            E se houver espaço para reduzir, a gente encontra.
+          </p>
+        </details>
+
+        <details class="faq-item">
+          <summary>A M.Dutra atende em todo o Brasil?</summary>
+          <p class="answer">
+            Sim. Sua obra está em São Paulo, Minas Gerais, Santa Catarina? Não importa.
+            Nós analisamos de qualquer lugar.
+          </p>
+        </details>
+      </div>
+
+      <div class="center reveal">
+        <a href="https://wa.me/5548992168025?text=Ol%C3%A1!%20Quero%20enviar%20meus%20documentos%20para%20an%C3%A1lise%20do%20INSS%20de%20obra." target="_blank" rel="noopener" class="btn btn-gold">Enviar Meus Documentos</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA FINAL ============ -->
+  <section class="cta-final">
+    <div class="container">
+      <h2 class="reveal">Você está prestes a tomar uma decisão cara. <span class="gold">Deixa a gente ajudar.</span></h2>
+      <p class="reveal">
+        Que você precisa de regularização de INSS de obra, isso é fato. Mas você não precisa aceitar
+        qualquer valor. A M.Dutra analisa cada detalhe, encontra cada oportunidade de economia legal,
+        aplica o fator de ajuste e conduz tudo com segurança.
+        <strong>Você paga o mínimo. Você dorme tranquilo.</strong>
+      </p>
+      <a href="https://wa.me/5548992168025?text=Ol%C3%A1!%20Quero%20analisar%20a%20d%C3%ADvida%20do%20INSS%20da%20minha%20obra." target="_blank" rel="noopener" class="btn btn-gold reveal">Analisar Minha Dívida Agora →</a>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer>
+    <div class="container">
+      <div class="logo"><img src="assets/logo-mdutra.png" alt="M.Dutra Soluções Financeiras"></div>
+      <p class="footer-desc">
+        M.Dutra Assessoria Contábil | Regularização de INSS de Obra | CND de Obra |
+        Assessoria Contábil Especializada
+      </p>
+      <div class="footer-links">
+        <a href="#">Termos e Condições de Uso</a>
+        <a href="#">Política de Privacidade</a>
+      </div>
+      <p class="copyright">© 2026 M.Dutra Assessoria Contábil</p>
+    </div>
+  </footer>
+
+  <!-- ============ WHATSAPP FLOAT ============ -->
+  <a class="whats-float" href="https://wa.me/5548992168025?text=Ol%C3%A1!%20Quero%20analisar%20a%20d%C3%ADvida%20do%20INSS%20da%20minha%20obra." target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
+    <svg viewBox="0 0 32 32"><path d="M16 .8C7.6.8.8 7.6.8 16c0 2.7.7 5.3 2 7.6L.7 31.3l7.9-2.1c2.2 1.2 4.7 1.9 7.4 1.9 8.4 0 15.2-6.8 15.2-15.1S24.4.8 16 .8zm0 27.7c-2.4 0-4.7-.7-6.7-1.9l-.5-.3-4.7 1.2 1.3-4.6-.3-.5c-1.3-2-2-4.4-2-6.9C3.1 8.9 8.9 3.1 16 3.1S28.9 8.9 28.9 16 23.1 28.5 16 28.5zm7.1-9.4c-.4-.2-2.3-1.1-2.6-1.3-.4-.1-.6-.2-.9.2-.3.4-1 1.3-1.2 1.5-.2.3-.4.3-.8.1-.4-.2-1.6-.6-3.1-1.9-1.2-1-1.9-2.3-2.2-2.7-.2-.4 0-.6.2-.8.2-.2.4-.5.6-.7.2-.2.3-.4.4-.7.1-.3.1-.5 0-.7-.1-.2-.9-2.1-1.2-2.9-.3-.8-.6-.7-.9-.7h-.8c-.3 0-.7.1-1.1.5-.4.4-1.4 1.4-1.4 3.4s1.5 3.9 1.7 4.2c.2.3 2.9 4.5 7.1 6.3 1 .4 1.8.7 2.4.9 1 .3 1.9.3 2.6.2.8-.1 2.3-1 2.7-1.9.3-.9.3-1.7.2-1.9-.1-.2-.4-.3-.8-.5z"/></svg>
+  </a>
+
+  <script>
+    // Mobile menu
+    function toggleMenu() {
+      document.getElementById('navLinks').classList.toggle('open');
+      document.querySelector('.menu-toggle').classList.toggle('open');
+    }
+    function closeMenu() {
+      document.getElementById('navLinks').classList.remove('open');
+      document.querySelector('.menu-toggle').classList.remove('open');
+    }
+
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
