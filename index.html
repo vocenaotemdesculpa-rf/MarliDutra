@@ -284,20 +284,48 @@
       font-weight: 700;
     }
 
-    /* Hero savings card */
+    /* Hero photo + floating savings card */
     .hero-visual { position: relative; }
 
-    .savings-card {
+    .hero-figure {
       position: relative;
-      background: linear-gradient(165deg, var(--navy-800) 0%, var(--navy-850) 100%);
-      border: 1px solid rgba(182, 159, 81, 0.45);
-      border-radius: 22px;
-      padding: 42px 36px 34px;
-      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5), 0 0 70px rgba(182, 159, 81, 0.14);
-      animation: floatCard 5.5s ease-in-out infinite;
-      max-width: 460px;
+      width: min(100%, 430px);
       margin-left: auto;
     }
+
+    .hero-photo {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 22px;
+      border: 1px solid rgba(182, 159, 81, 0.45);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5), 0 0 70px rgba(182, 159, 81, 0.14);
+    }
+
+    .savings-card {
+      background: linear-gradient(165deg, var(--navy-800) 0%, var(--navy-850) 100%);
+      border: 1px solid rgba(182, 159, 81, 0.45);
+      border-radius: 18px;
+      padding: 26px 24px 22px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
+    }
+
+    .hero-figure .savings-card {
+      position: absolute;
+      left: -30px;
+      bottom: 28px;
+      width: 280px;
+      padding-top: 44px;
+      animation: floatCard 5.5s ease-in-out infinite;
+    }
+
+    .hero-figure .sc-tag { left: 20px; font-size: 0.66rem; padding: 7px 13px; }
+    .hero-figure .sc-pct { top: -16px; right: -8px; font-size: 0.92rem; padding: 11px 14px; }
+    .hero-figure .sc-old { font-size: 1.3rem; }
+    .hero-figure .sc-new { font-size: 1.85rem; }
+    .hero-figure .sc-arrow { margin: 12px 0; }
+    .hero-figure .sc-economy { margin-top: 16px; padding-top: 14px; }
+    .hero-figure .sc-caption { display: none; }
 
     @keyframes floatCard {
       0%, 100% { transform: translateY(0); }
@@ -588,10 +616,32 @@
 
     .sobre-grid {
       display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
+      grid-template-columns: 0.85fr 1.15fr;
       gap: 56px;
-      align-items: start;
-      margin-bottom: 60px;
+      align-items: center;
+      margin-bottom: 44px;
+    }
+
+    .sobre-photos { position: relative; }
+
+    .sobre-photo-main {
+      width: 90%;
+      height: auto;
+      border-radius: 18px;
+      border: 1px solid rgba(182, 159, 81, 0.45);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+    }
+
+    .sobre-photo-sub {
+      position: absolute;
+      right: 0;
+      bottom: -28px;
+      width: 38%;
+      height: auto;
+      border-radius: 14px;
+      border: 5px solid var(--navy-850);
+      outline: 1px solid rgba(182, 159, 81, 0.5);
+      box-shadow: 0 18px 44px rgba(0, 0, 0, 0.6);
     }
 
     .sobre-text h2 { margin-bottom: 8px; }
@@ -605,7 +655,12 @@
 
     .sobre-text p { color: var(--text-muted); margin-bottom: 18px; }
 
-    .sobre-points { display: flex; flex-direction: column; gap: 18px; }
+    .sobre-points {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+      margin-bottom: 60px;
+    }
 
     .point {
       background: var(--navy-800);
@@ -831,8 +886,20 @@
       .hero-copy { margin-left: auto; margin-right: auto; }
       .hero-ctas, .hero-trust { justify-content: center; }
 
-      .savings-card { margin: 0 auto; }
+      .hero-figure { margin: 0 auto; max-width: 380px; }
+      .hero-figure .savings-card {
+        position: static;
+        width: 100%;
+        margin: -44px auto 0;
+      }
       .sc-pct { right: 0; }
+
+      .sobre-photos { max-width: 420px; margin: 0 auto; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .savings-card, .hero-badge { animation: none; }
+      .reveal { transition: none; }
     }
 
     @media (max-width: 820px) {
@@ -918,8 +985,10 @@
       </div>
 
       <div class="hero-visual reveal">
-        <div class="savings-card">
-          <span class="sc-tag">Caso real — obra de 270m²</span>
+        <div class="hero-figure">
+          <img class="hero-photo" src="assets/marli-hero.jpg" width="900" height="1350" alt="Marli Dutra, contadora especialista em regularização de INSS de obra" loading="eager">
+          <div class="savings-card">
+          <span class="sc-tag">Caso real — 270m²</span>
           <span class="sc-pct">−70%</span>
 
           <span class="sc-label">Guia recebida</span>
@@ -938,6 +1007,7 @@
           </div>
 
           <p class="sc-caption">A análise correta transforma uma cobrança alta em economia. Por que esperar para descobrir?</p>
+          </div>
         </div>
       </div>
     </div>
@@ -1081,6 +1151,10 @@
   <section class="sobre" id="sobre">
     <div class="container">
       <div class="sobre-grid">
+        <div class="sobre-photos reveal">
+          <img class="sobre-photo-main" src="assets/marli-sobre.jpg" width="900" height="1349" alt="Marli Dutra, contadora especialista em regularização de INSS de obra" loading="lazy">
+          <img class="sobre-photo-sub" src="assets/marli-sobre-2.jpg" width="900" height="1350" alt="Marli Dutra durante atendimento" loading="lazy">
+        </div>
         <div class="sobre-text reveal">
           <span class="section-label">Quem está por trás disso</span>
           <h2>30 anos vendo o que <span class="gold">ninguém mais vê.</span></h2>
@@ -1097,8 +1171,9 @@
             sem pagar mais do que realmente precisa.
           </p>
         </div>
+      </div>
 
-        <div class="sobre-points reveal">
+      <div class="sobre-points reveal">
           <div class="point">
             <h3>Análise antes do pagamento</h3>
             <p>"Ninguém paga sem saber o que está pagando."</p>
@@ -1112,7 +1187,6 @@
             <p>"Quem fala com você entende o seu problema. Porque vive disso há 30 anos."</p>
           </div>
         </div>
-      </div>
 
       <div class="stats-grid">
         <div class="stat reveal">
