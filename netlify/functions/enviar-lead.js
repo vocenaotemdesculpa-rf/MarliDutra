@@ -4,17 +4,35 @@
  * front-end usa a mesma URL nas duas hospedagens.
  */
 
-const { processarLead } = require('../../lib/evolution');
+const { processarLead, diagnostico } = require('../../lib/evolution');
 
 exports.handler = async function (event) {
   if (event.httpMethod === 'OPTIONS') {
-    return { statusCode: 204, headers: { Allow: 'POST, OPTIONS' }, body: '' };
+    return { statusCode: 204, headers: { Allow: 'GET, POST, OPTIONS' }, body: '' };
+  }
+
+  // Ver comentário na versão da Vercel (api/enviar-lead.js).
+  if (event.httpMethod === 'GET') {
+    const teste = (event.queryStringParameters || {}).teste;
+    const grupo = process.env.EVOLUTION_GROUP_ID || '';
+    const podeTestar = Boolean(teste) && Boolean(grupo) && teste === grupo;
+
+    const relatorio = await diagnostico(podeTestar);
+    if (teste && !podeTestar) {
+      relatorio.teste = 'NÃO EXECUTADO: o valor de ?teste= precisa ser exatamente o EVOLUTION_GROUP_ID configurado.';
+    }
+
+    return {
+      statusCode: 200,
+      headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' },
+      body: JSON.stringify(relatorio)
+    };
   }
 
   if (event.httpMethod !== 'POST') {
     return {
       statusCode: 405,
-      headers: { Allow: 'POST, OPTIONS', 'Content-Type': 'application/json' },
+      headers: { Allow: 'GET, POST, OPTIONS', 'Content-Type': 'application/json' },
       body: JSON.stringify({ ok: false, erro: 'Método não permitido.' })
     };
   }

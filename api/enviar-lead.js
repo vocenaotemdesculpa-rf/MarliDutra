@@ -4,16 +4,35 @@
  * Rota pública: POST /api/enviar-lead
  */
 
-const { processarLead } = require('../lib/evolution');
+const { processarLead, diagnostico } = require('../lib/evolution');
 
 module.exports = async function handler(req, res) {
   if (req.method === 'OPTIONS') {
-    res.setHeader('Allow', 'POST, OPTIONS');
+    res.setHeader('Allow', 'GET, POST, OPTIONS');
     return res.status(204).end();
   }
 
+  // Diagnóstico: abrir /api/enviar-lead no navegador mostra o que está
+  // configurado (nunca a apikey). Acrescentar ?teste=<EVOLUTION_GROUP_ID>
+  // dispara uma mensagem de teste — o group id funciona como senha simples
+  // para ninguém de fora conseguir mandar mensagem no grupo.
+  if (req.method === 'GET') {
+    const url = new URL(req.url, 'http://localhost');
+    const teste = url.searchParams.get('teste');
+    const grupo = process.env.EVOLUTION_GROUP_ID || '';
+    const podeTestar = Boolean(teste) && Boolean(grupo) && teste === grupo;
+
+    const relatorio = await diagnostico(podeTestar);
+    if (teste && !podeTestar) {
+      relatorio.teste = 'NÃO EXECUTADO: o valor de ?teste= precisa ser exatamente o EVOLUTION_GROUP_ID configurado.';
+    }
+
+    res.setHeader('Cache-Control', 'no-store');
+    return res.status(200).json(relatorio);
+  }
+
   if (req.method !== 'POST') {
-    res.setHeader('Allow', 'POST, OPTIONS');
+    res.setHeader('Allow', 'GET, POST, OPTIONS');
     return res.status(405).json({ ok: false, erro: 'Método não permitido.' });
   }
 
