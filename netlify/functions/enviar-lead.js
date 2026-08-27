@@ -4,7 +4,7 @@
  * front-end usa a mesma URL nas duas hospedagens.
  */
 
-const { processarLead, diagnostico } = require('../../lib/evolution');
+const { processarLead, diagnostico, normalizarGrupo } = require('../../lib/evolution');
 
 exports.handler = async function (event) {
   if (event.httpMethod === 'OPTIONS') {
@@ -15,7 +15,8 @@ exports.handler = async function (event) {
   if (event.httpMethod === 'GET') {
     const teste = (event.queryStringParameters || {}).teste;
     const grupo = process.env.EVOLUTION_GROUP_ID || '';
-    const podeTestar = Boolean(teste) && Boolean(grupo) && teste === grupo;
+    const podeTestar = Boolean(teste) && Boolean(grupo) &&
+      (teste === grupo || normalizarGrupo(teste) === normalizarGrupo(grupo));
 
     const relatorio = await diagnostico(podeTestar);
     if (teste && !podeTestar) {

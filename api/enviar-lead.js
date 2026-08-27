@@ -4,7 +4,7 @@
  * Rota pública: POST /api/enviar-lead
  */
 
-const { processarLead, diagnostico } = require('../lib/evolution');
+const { processarLead, diagnostico, normalizarGrupo } = require('../lib/evolution');
 
 module.exports = async function handler(req, res) {
   if (req.method === 'OPTIONS') {
@@ -20,7 +20,8 @@ module.exports = async function handler(req, res) {
     const url = new URL(req.url, 'http://localhost');
     const teste = url.searchParams.get('teste');
     const grupo = process.env.EVOLUTION_GROUP_ID || '';
-    const podeTestar = Boolean(teste) && Boolean(grupo) && teste === grupo;
+    const podeTestar = Boolean(teste) && Boolean(grupo) &&
+      (teste === grupo || normalizarGrupo(teste) === normalizarGrupo(grupo));
 
     const relatorio = await diagnostico(podeTestar);
     if (teste && !podeTestar) {
