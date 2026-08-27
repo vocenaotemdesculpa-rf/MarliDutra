@@ -1,12 +1,16 @@
 # Envio automático dos leads para o grupo do WhatsApp
 
-Quando alguém conclui o formulário do site, acontecem duas coisas ao mesmo tempo:
+Quando alguém conclui o formulário do site:
 
 1. Os dados da obra são enviados para o **grupo interno no WhatsApp**, via Evolution API.
-2. O **WhatsApp do cliente abre** com a mensagem já preenchida, para ele iniciar a conversa.
+2. Confirmado o envio, o visitante vai para a **página de obrigado** (`obrigado.html`).
 
-Se o envio para o grupo falhar por qualquer motivo, o cliente não percebe — a conversa
-dele abre normalmente. A falha fica registrada no log da função.
+O WhatsApp do visitante **não** é aberto — o contato parte da equipe, a partir da
+mensagem que chega no grupo.
+
+Se o envio falhar, o visitante **não** avança para a página de obrigado: continua no
+resumo, com o aviso do erro e o botão "Tentar novamente". Assim ninguém vê
+"recebemos seus dados" quando nada chegou.
 
 ## Por que existe uma função no servidor
 
@@ -24,6 +28,8 @@ que guarda a chave e conversa com a Evolution.
 | `netlify/functions/enviar-lead.js` | Mesmo endpoint na Netlify |
 | `netlify.toml` | Faz `/api/enviar-lead` funcionar também na Netlify |
 | `scripts/listar-grupos.mjs` | Descobre o ID do grupo |
+| `obrigado.html` | Página exibida após o envio |
+| `scripts/dev-local.mjs` | Servidor local para testar antes de publicar |
 | `.env.example` | Modelo das variáveis |
 
 ## Passo 1 — Variáveis de ambiente

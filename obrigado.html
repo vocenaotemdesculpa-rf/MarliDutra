@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Recebemos seus dados | M.Dutra Assessoria Contábil</title>
+  <meta name="description" content="Recebemos as informações da sua obra. Nossa equipe vai analisar e retornar em breve.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --navy-950: #01001e;
+      --navy-900: #070826;
+      --navy-850: #0d0e30;
+      --gold-700: #96783f;
+      --gold-600: #b69f51;
+      --gold-500: #d2af6d;
+      --gold-400: #e3c465;
+      --light: #f3f4f7;
+      --white: #ffffff;
+      --text-muted: rgba(243, 244, 247, 0.72);
+      --gold-gradient: linear-gradient(100deg, var(--gold-700) 0%, var(--gold-600) 35%, var(--gold-400) 100%);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Sora', sans-serif;
+      background: var(--navy-900);
+      color: var(--light);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 20px;
+    }
+
+    /* Brilho suave ao fundo, igual ao do site */
+    body::before {
+      content: '';
+      position: fixed;
+      top: -20%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 900px;
+      height: 900px;
+      background: radial-gradient(circle, rgba(182, 159, 81, 0.13) 0%, transparent 62%);
+      pointer-events: none;
+    }
+
+    .card {
+      position: relative;
+      width: min(600px, 100%);
+      background: linear-gradient(180deg, var(--navy-850) 0%, var(--navy-900) 100%);
+      border: 1px solid rgba(182, 159, 81, 0.3);
+      border-radius: 24px;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55);
+      padding: 48px 40px 40px;
+      text-align: center;
+      animation: entrada 0.5s ease;
+    }
+
+    @keyframes entrada {
+      from { opacity: 0; transform: translateY(22px); }
+      to { opacity: 1; transform: none; }
+    }
+
+    .logo img { height: 54px; width: auto; margin: 0 auto 28px; display: block; }
+
+    .check {
+      width: 74px;
+      height: 74px;
+      margin: 0 auto 26px;
+      border-radius: 50%;
+      background: var(--gold-gradient);
+      color: var(--navy-950);
+      font-size: 2.2rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 14px 34px rgba(182, 159, 81, 0.38);
+    }
+
+    h1 {
+      font-size: clamp(1.5rem, 4.6vw, 2rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+    }
+
+    h1 span {
+      background: var(--gold-gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .intro {
+      margin-top: 16px;
+      color: var(--text-muted);
+      font-size: 1.02rem;
+    }
+
+    .passos {
+      margin: 32px 0 8px;
+      text-align: left;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 22px 24px;
+    }
+
+    .passos h2 {
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold-500);
+      margin-bottom: 16px;
+    }
+
+    .passos li {
+      list-style: none;
+      display: flex;
+      gap: 14px;
+      padding: 10px 0;
+      font-size: 0.94rem;
+      color: var(--light);
+    }
+
+    .passos li span {
+      flex: 0 0 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: rgba(182, 159, 81, 0.16);
+      border: 1px solid rgba(182, 159, 81, 0.45);
+      color: var(--gold-400);
+      font-size: 0.8rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .aviso {
+      margin-top: 26px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .acoes {
+      margin-top: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-family: inherit;
+      font-weight: 700;
+      font-size: 0.98rem;
+      padding: 15px 32px;
+      border-radius: 100px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+    }
+
+    .btn-gold {
+      background: var(--gold-gradient);
+      color: var(--navy-950);
+      box-shadow: 0 10px 30px rgba(182, 159, 81, 0.32);
+    }
+
+    .btn-gold:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(182, 159, 81, 0.45); }
+
+    .link-secundario {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(243, 244, 247, 0.25);
+      padding-bottom: 2px;
+    }
+
+    .link-secundario:hover { color: var(--gold-400); border-color: var(--gold-400); }
+
+    @media (max-width: 520px) {
+      .card { padding: 36px 22px 30px; }
+      .passos { padding: 18px 18px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .card { animation: none; }
+      .btn:hover { transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <div class="logo"><img src="assets/logo-mdutra.png" alt="M.Dutra Assessoria Contábil"></div>
+
+    <div class="check">✓</div>
+
+    <h1>Recebemos os dados da sua obra. <span>Agora é com a gente.</span></h1>
+
+    <p class="intro">
+      Suas informações já chegaram para a nossa equipe. Vamos analisar cada detalhe
+      antes de calcular quanto você pode economizar legalmente no INSS da obra.
+    </p>
+
+    <section class="passos">
+      <h2>O que acontece agora</h2>
+      <ul>
+        <li><span>1</span> Nossa equipe analisa os dados da sua obra e a legislação aplicável.</li>
+        <li><span>2</span> Calculamos a economia possível dentro da lei, sem risco fiscal.</li>
+        <li><span>3</span> Entramos em contato pelo WhatsApp que você informou, com o resultado.</li>
+      </ul>
+    </section>
+
+    <p class="aviso">
+      Fique de olho no seu WhatsApp — o retorno costuma sair em até 1 dia útil.
+    </p>
+
+    <div class="acoes">
+      <a class="btn btn-gold" href="index.html">Voltar para o site</a>
+      <a class="link-secundario" href="https://wa.me/5548992168025?text=Ol%C3%A1!%20Acabei%20de%20enviar%20os%20dados%20da%20minha%20obra%20pelo%20site." target="_blank" rel="noopener">
+        Prefere falar agora? Chame no WhatsApp
+      </a>
+    </div>
+  </main>
+</body>
+</html>

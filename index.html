@@ -1689,7 +1689,6 @@
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
     /* ================= Formulário de análise (quiz multi-etapas) ================= */
-    const QUIZ_PHONE = '5548992168025';
     const QUIZ_ENDPOINT = '/api/enviar-lead';
 
     const UFS = ['AC','AL','AP','AM','BA','CE','DF','ES','GO','MA','MT','MS','MG','PA','PB','PR','PE','PI','RJ','RN','RS','RO','RR','SC','SP','SE','TO'];
@@ -1913,12 +1912,14 @@
         '<div class="quiz-check">✓</div>' +
         '<h3 class="quiz-q" id="quizQuestion">Prontinho, ' + primeiro + '!</h3>' +
         '<p class="quiz-sub">Confira os dados da sua obra e envie para a nossa análise. ' +
-        'Nossa equipe retorna com o cálculo da sua possível economia no INSS.</p>' +
+        'Nossa equipe retorna pelo WhatsApp com o cálculo da sua possível economia no INSS.</p>' +
         '<div class="quiz-resume">' +
         linhas.map(function (l) { return '<div><span>' + l[0] + '</span><span>' + l[1] + '</span></div>'; }).join('') +
-        '</div></div>';
+        '</div>' +
+        '<p class="quiz-err" id="quizErroEnvio"></p>' +
+        '</div>';
 
-      quizNext.textContent = 'Enviar para análise no WhatsApp →';
+      quizNext.textContent = 'Enviar para análise →';
       quizBack.hidden = false;
       quizCount.textContent = 'Última etapa';
       quizBar.style.width = '100%';
@@ -1938,76 +1939,43 @@
       };
     }
 
-    // Notifica o grupo interno pela Evolution. Roda em paralelo: se falhar,
-    // o cliente nem percebe, porque a conversa no WhatsApp abre do mesmo jeito.
-    function notificarGrupo() {
-      try {
-        return fetch(QUIZ_ENDPOINT, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(dadosDoLead()),
-          keepalive: true
-        }).then(function (r) {
-          if (!r.ok) console.warn('[quiz] grupo não notificado, status ' + r.status);
-          return r.ok;
-        }).catch(function (e) {
-          console.warn('[quiz] falha ao notificar o grupo:', e);
-          return false;
-        });
-      } catch (e) {
-        console.warn('[quiz] falha ao notificar o grupo:', e);
-        return Promise.resolve(false);
-      }
-    }
-
-    function linkClienteWhats() {
-      const texto =
-        'Olá! Quero analisar o INSS da minha obra.\n\n' +
-        '*Nome:* ' + quizAnswers.nome + '\n' +
-        '*WhatsApp:* ' + quizAnswers.telefone + '\n' +
-        '*Dono da obra:* ' + quizAnswers.dono + '\n' +
-        '*Destinação:* ' + quizAnswers.destinacao + '\n' +
-        '*Área total:* ' + quizAnswers.area + ' m²\n' +
-        '*Estado (UF):* ' + quizAnswers.uf + '\n' +
-        '*Início da obra:* ' + fmtMes(quizAnswers.inicio) + '\n' +
-        '*Término da obra:* ' + fmtMes(quizAnswers.fim);
-
-      return 'https://wa.me/' + QUIZ_PHONE + '?text=' + encodeURIComponent(texto);
+    // Envia o lead para o grupo pela Evolution. Só depois de confirmado é que
+    // o visitante vai para a página de obrigado — assim ninguém vê "recebemos
+    // seus dados" quando na verdade nada chegou.
+    function enviarLead() {
+      return fetch(QUIZ_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(dadosDoLead())
+      }).then(function (r) {
+        if (!r.ok) throw new Error('status ' + r.status);
+        return true;
+      });
     }
 
     function sendQuiz() {
       if (quizEnviando) return;
       quizEnviando = true;
 
-      notificarGrupo();
+      quizNext.disabled = true;
+      quizNext.textContent = 'Enviando...';
+      const erro = document.getElementById('quizErroEnvio');
+      if (erro) erro.textContent = '';
 
-      // Aberto no mesmo clique para o navegador não bloquear como pop-up.
-      const link = linkClienteWhats();
-      window.open(link, '_blank', 'noopener');
-
-      renderQuizEnviado(link);
-    }
-
-    function renderQuizEnviado(link) {
-      quizBody.innerHTML =
-        '<div class="quiz-step quiz-done">' +
-        '<div class="quiz-check">✓</div>' +
-        '<h3 class="quiz-q" id="quizQuestion">Recebemos os seus dados!</h3>' +
-        '<p class="quiz-sub">Nossa equipe já foi avisada e vai analisar as informações da sua obra. ' +
-        'Abrimos o WhatsApp em outra aba para você conversar com a M.Dutra agora mesmo.</p>' +
-        '<p class="quiz-sub" style="margin-top:18px">Não abriu? ' +
-        '<a href="' + link + '" target="_blank" rel="noopener" style="color:var(--gold-400);text-decoration:underline">' +
-        'Clique aqui para falar no WhatsApp</a>.</p>' +
-        '</div>';
-
-      quizNext.textContent = 'Fechar';
-      quizBack.hidden = true;
-      quizCount.textContent = 'Obrigado pela confiança';
-      quizBar.style.width = '100%';
+      enviarLead().then(function () {
+        window.location.href = 'obrigado.html';
+      }).catch(function (e) {
+        console.warn('[quiz] falha ao enviar o lead:', e);
+        quizEnviando = false;
+        quizNext.disabled = false;
+        quizNext.textContent = 'Tentar novamente';
+        if (erro) {
+          erro.textContent = 'Não conseguimos enviar agora. Verifique sua conexão e tente de novo.';
+        }
+      });
     }
 
     quizNext.addEventListener('click', function () {
-      if (quizEnviando) { closeQuiz(); return; }
       if (quizIndex >= QUIZ_STEPS.length) { sendQuiz(); } else { advanceQuiz(); }
     });
 
