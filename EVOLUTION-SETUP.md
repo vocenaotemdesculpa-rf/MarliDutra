@@ -60,6 +60,22 @@ Ele lista os grupos da instância já no formato pronto para colar:
 
 Requisito: o número da instância precisa **ser membro** do grupo.
 
+## Testando na sua máquina
+
+Abrir o `index.html` direto da pasta **não funciona**: a rota `/api/enviar-lead` é uma
+função de servidor, que só existe quando o site está publicado. Localmente ela não
+existe, o envio cai em 404 e nada chega no grupo.
+
+Para testar de verdade na sua máquina, com o `.env` preenchido:
+
+```bash
+node scripts/dev-local.mjs
+```
+
+Ele sobe o site e a função juntos e mostra o endereço no terminal (usa a porta 3000,
+ou a próxima livre). Abra esse endereço e preencha o formulário normalmente. Para ver
+só a configuração, abra `/api/enviar-lead` no navegador.
+
 ## Passo 3 — Conferir
 
 Preencha o formulário no site publicado. A mensagem deve chegar no grupo assim:
