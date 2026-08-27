@@ -1942,7 +1942,17 @@
     // Envia o lead para o grupo pela Evolution. Só depois de confirmado é que
     // o visitante vai para a página de obrigado — assim ninguém vê "recebemos
     // seus dados" quando na verdade nada chegou.
+    // Aberto direto da pasta (file://) não existe servidor, então /api/enviar-lead
+    // não existe e o navegador reporta como erro de CORS — confuso. Avisa direito.
+    function servidorIndisponivel() {
+      return location.protocol === 'file:';
+    }
+
     function enviarLead() {
+      if (servidorIndisponivel()) {
+        return Promise.reject(new Error('sem-servidor'));
+      }
+
       return fetch(QUIZ_ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -1970,7 +1980,9 @@
         quizNext.disabled = false;
         quizNext.textContent = 'Tentar novamente';
         if (erro) {
-          erro.textContent = 'Não conseguimos enviar agora. Verifique sua conexão e tente de novo.';
+          erro.textContent = e && e.message === 'sem-servidor'
+            ? 'Esta página foi aberta direto da pasta, sem servidor. Publique o site ou rode "node scripts/dev-local.mjs" para o envio funcionar.'
+            : 'Não conseguimos enviar agora. Verifique sua conexão e tente de novo.';
         }
       });
     }
