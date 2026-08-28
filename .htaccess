@@ -1,13 +1,43 @@
-# Faz /api/enviar-lead apontar para o arquivo PHP, para o endereco ser o mesmo
-# usado na Vercel. Se o rewrite nao estiver disponivel, o proprio formulario
-# tenta /api/enviar-lead.php automaticamente.
+# ---------------------------------------------------------------------------
+# M.Dutra — configuracao do servidor (Hostinger / Apache / LiteSpeed)
+#
+# Se este arquivo causar erro 500, apague-o: o site volta a funcionar e o
+# formulario continua enviando, porque ele tenta /api/enviar-lead.php sozinho
+# quando a rota sem extensao nao responde.
+# ---------------------------------------------------------------------------
+
+# Faz /api/enviar-lead apontar para o arquivo PHP, mantendo o mesmo endereco
+# usado na Vercel.
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteRule ^api/enviar-lead$ api/enviar-lead.php [L]
 </IfModule>
 
-# As credenciais ficam em api/config.php. Ele e PHP e nao expoe o conteudo,
-# mas negar o acesso direto e uma protecao a mais.
+# --------------------------------------------------------------- privacidade
+# Pastas que existem so no desenvolvimento. Respondem 404 para nao revelar
+# nem que existem.
+# Se mod_alias nao existir, a diretiva causaria erro 500 — por isso o guarda.
+<IfModule mod_alias.c>
+  RedirectMatch 404 ^/(lib|scripts|netlify|node_modules|\.git)(/|$)
+
+  # O codigo Node nao roda aqui e nao deve ser lido de fora.
+  RedirectMatch 404 ^/api/.*\.(js|mjs|exemplo\.php)$
+</IfModule>
+
+# Arquivos que comecam com ponto (.env, .gitignore, .htaccess...) e arquivos
+# de configuracao do projeto.
+<FilesMatch "^\.|\.(env|toml|json|md|mjs|lock|zip|log)$">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+  </IfModule>
+</FilesMatch>
+
+# As credenciais da Evolution ficam aqui. E um arquivo PHP e nao expoe o
+# proprio conteudo, mas negar o acesso direto e uma protecao a mais.
 <Files "config.php">
   <IfModule mod_authz_core.c>
     Require all denied
@@ -18,13 +48,17 @@
   </IfModule>
 </Files>
 
-# Nao serve os arquivos de configuracao do projeto.
-<FilesMatch "^(\.env.*|netlify\.toml|package\.json)$">
-  <IfModule mod_authz_core.c>
-    Require all denied
-  </IfModule>
-  <IfModule !mod_authz_core.c>
-    Order allow,deny
-    Deny from all
-  </IfModule>
-</FilesMatch>
+# Nao lista o conteudo das pastas.
+<IfModule mod_autoindex.c>
+  Options -Indexes
+</IfModule>
+
+# ------------------------------------------------------------------ cabecalhos
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  # A resposta da API nunca deve ficar em cache.
+  <FilesMatch "enviar-lead\.php$">
+    Header always set Cache-Control "no-store"
+  </FilesMatch>
+</IfModule>
