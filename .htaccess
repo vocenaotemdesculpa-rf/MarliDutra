@@ -1,0 +1,30 @@
+# Faz /api/enviar-lead apontar para o arquivo PHP, para o endereco ser o mesmo
+# usado na Vercel. Se o rewrite nao estiver disponivel, o proprio formulario
+# tenta /api/enviar-lead.php automaticamente.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteRule ^api/enviar-lead$ api/enviar-lead.php [L]
+</IfModule>
+
+# As credenciais ficam em api/config.php. Ele e PHP e nao expoe o conteudo,
+# mas negar o acesso direto e uma protecao a mais.
+<Files "config.php">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+  </IfModule>
+</Files>
+
+# Nao serve os arquivos de configuracao do projeto.
+<FilesMatch "^(\.env.*|netlify\.toml|package\.json)$">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+  </IfModule>
+</FilesMatch>

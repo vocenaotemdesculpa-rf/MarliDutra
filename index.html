@@ -1948,18 +1948,29 @@
       return location.protocol === 'file:';
     }
 
-    function enviarLead() {
-      if (servidorIndisponivel()) {
-        return Promise.reject(new Error('sem-servidor'));
-      }
-
-      return fetch(QUIZ_ENDPOINT, {
+    function postarLead(endereco) {
+      return fetch(endereco, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(dadosDoLead())
       }).then(function (r) {
         if (!r.ok) throw new Error('status ' + r.status);
         return true;
+      });
+    }
+
+    function enviarLead() {
+      if (servidorIndisponivel()) {
+        return Promise.reject(new Error('sem-servidor'));
+      }
+
+      return postarLead(QUIZ_ENDPOINT).catch(function (e) {
+        // Hospedagem PHP (Hostinger, cPanel) não executa a função Node: ali a
+        // rota sem extensão dá 404 e quem responde é a versão PHP.
+        if (e && e.message === 'status 404') {
+          return postarLead(QUIZ_ENDPOINT + '.php');
+        }
+        throw e;
       });
     }
 
